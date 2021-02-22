@@ -13,13 +13,19 @@ public class Login_StepDefinitions {
     public void theUserLogin() {
 Driver.getDriver().get(ConfigurationReader.getProperty("url"));
     }
+    @Given("The user navigates to login page")
+    public void the_user_navigates_to_login_page() {
 
-    @When("the user login as student")
-    public void theUserLoginAsStudent() {
-        loginPage.loginAsStudent2();
     }
 
-    @Then("the user landing on the books page")
-    public void theUserLandingOnTheBooksPage() {
+    @When("The user enters {string} and {string}")
+    public void the_user_enters_and(String string, String string2) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @Then("{string} on {string}")
+    public void on(String string, String string2) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
     }
 }
