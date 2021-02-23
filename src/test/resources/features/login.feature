@@ -15,12 +15,11 @@ Feature: Login feature
       | student95@library   | Vu2BiIwB | Books     |
       | student96@library   | HvGl6Nsy | Books     |
       | librarian16@library | 8BzUhhaU | Dashboard |
-#  //a[@href='#dashboard']
-#  @librarian
-#  Scenario: Login as a librarian
-#    Given I am on the login page
-#    When I login as a librarian
-#    Then dashboard should be displayed
+
+  @librarian
+  Scenario: Login as a librarian
+    When The user login as a librarian
+    Then dashboard should be displayed
 #  @student
 #  Scenario: Login as a student
 #    Given I am on the login page

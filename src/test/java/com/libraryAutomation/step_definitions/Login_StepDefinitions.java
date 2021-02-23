@@ -56,4 +56,23 @@ public class Login_StepDefinitions {
             Driver.closeDriver();
         }
     }
+//-----------------------------------------DOING 2ND SCENARIO-----------------------------------------------
+
+    @When("The user login as a librarian")
+        public void the_user_login_as_a_librarian() {
+        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        loginPage.loginAsLibrarian();
+    }
+
+
+    @Then("dashboard should be displayed")
+    public void dashboard_should_be_displayed() {
+        Assert.assertTrue(basePage.dashboardModule.isDisplayed());
+        Driver.closeDriver();
+    }
+
+
+
+
+
 }
