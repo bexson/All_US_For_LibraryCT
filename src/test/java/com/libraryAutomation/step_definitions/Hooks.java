@@ -11,16 +11,16 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 public class Hooks {
-
+//----------------------------------------->CATEGORIES DROPDOWN HOOKS<-------------------------------------------------
+    String url = ConfigurationReader.getProperty("url");
     @Before(value = "@categories")
     public void logining(){
-        LoginPage loginPage = new LoginPage();
-        String url = ConfigurationReader.getProperty("url");
         Driver.getDriver().get(url);
+        LoginPage loginPage = new LoginPage();
         loginPage.loginAsStudent1();
     }
 
-    @After
+    @After(value = "@categories")
     public void closeDriver(Scenario scenario){
 
         if (scenario.isFailed()) {
@@ -29,8 +29,20 @@ public class Hooks {
         }
 
 
-//        BrowserUtils.sleep(2);
-//        Driver.getDriver().close();
+        BrowserUtils.sleep(5);
+        Driver.closeDriver();
     }
+//----------------------------------------->LOGIN FEATURE HOOKS<-------------------------------------------------
+
+    @Before(value = "@loginFeature")
+    public void loginToEnv(){
+        Driver.getDriver().get(url);
+    }
+    @After(value = "@loginFeature")
+    public void close(){
+        BrowserUtils.sleep(3);
+        Driver.closeDriver();
+    }
+//----------------------------------------->LOGIN FEATURE HOOKS<-------------------------------------------------
 
 }

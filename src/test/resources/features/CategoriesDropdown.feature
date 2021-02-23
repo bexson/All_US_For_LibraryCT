@@ -1,9 +1,9 @@
+@categories
 Feature: Search books with different categories.
   7. As a students, I should be able to search books with different categories.
 
   Background: Student is already logged in
     Given Student is on the landing page
-
 
   Scenario: Default option is "All" by default
     When Student clicks categories dropdown
@@ -30,7 +30,6 @@ Feature: Search books with different categories.
       | Memoir                  |
       | Poetry                  |
 
-    @categories
     Scenario: Student search books with different categories
       When Student selects all the options like below:
         | ALL                     |

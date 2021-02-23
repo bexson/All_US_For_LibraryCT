@@ -17,11 +17,8 @@ public class Login_StepDefinitions {
     LandingPage landingPage = new LandingPage();
     BasePage basePage = new BasePage();
 
-    String url = ConfigurationReader.getProperty("url");
-
     @Given("The user navigates to login page")
     public void the_user_navigates_to_login_page() {
-        Driver.getDriver().get(url);
     }
 
     @When("The user enters {string} and {string}")
@@ -50,19 +47,11 @@ public class Login_StepDefinitions {
             assert dashboardText.equalsIgnoreCase(page);
         }
 
-        landingPage.studentButton.click();
-        BrowserUtils.sleep(1);
-        landingPage.logOutButton.click();
-        BrowserUtils.sleep(1);
-        if (email.contains("librarian")){
-            Driver.closeDriver();
-        }
     }
 //-----------------------------------------DOING 2ND SCENARIO-----------------------------------------------
 
     @When("The user login as a librarian")
         public void the_user_login_as_a_librarian() {
-        Driver.getDriver().get(url);
         loginPage.loginAsLibrarian();
     }
 
@@ -70,14 +59,12 @@ public class Login_StepDefinitions {
     @Then("dashboard should be displayed")
     public void dashboard_should_be_displayed() {
         assert basePage.dashboardModule.isDisplayed();
-        Driver.closeDriver();
     }
 
 
 //-----------------------------------------DOING 3RD SCENARIO-----------------------------------------------
 @When("the user login as a student")
 public void the_user_login_as_a_student() {
-    Driver.getDriver().get(url);
     loginPage.loginAsStudent1();
 }
 
