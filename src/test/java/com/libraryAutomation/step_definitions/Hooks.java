@@ -39,10 +39,29 @@ public class Hooks {
         Driver.getDriver().get(url);
     }
     @After(value = "@loginFeature")
-    public void close(){
+    public void close(Scenario scenario){
+        if (scenario.isFailed()) {
+            byte[] screenShot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenShot, "image/png", scenario.getName());
+        }
         BrowserUtils.sleep(3);
         Driver.closeDriver();
     }
-//----------------------------------------->LOGIN FEATURE HOOKS<-------------------------------------------------
+//----------------------------------------->LOGOUT FEATURE HOOKS<-------------------------------------------------
+
+    @Before(value = "@logout")
+    public void getLoginPage(){
+        Driver.getDriver().get(url);
+    }
+
+    @After(value = "@logout")
+    public void close_Driver(Scenario scenario){
+        if (scenario.isFailed()) {
+            byte[] screenShot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenShot, "image/png", scenario.getName());
+        }
+        BrowserUtils.sleep(3);
+        Driver.closeDriver();
+    }
 
 }
