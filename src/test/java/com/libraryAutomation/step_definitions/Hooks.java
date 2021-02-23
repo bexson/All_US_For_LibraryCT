@@ -29,7 +29,7 @@ public class Hooks {
         }
 
 
-        BrowserUtils.sleep(5);
+//        BrowserUtils.sleep(2);
 //        Driver.getDriver().close();
     }
 

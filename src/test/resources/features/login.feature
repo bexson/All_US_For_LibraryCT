@@ -7,13 +7,15 @@ Feature: Login feature
   Scenario Outline: User logs in using appropriate credentials
     Given The user navigates to login page
     When The user enters "<email>" and "<password>"
-    Then "<role>" on "<page>"
+    And The user clicks sign in button
+    Then The user see "<page>" on this "<email>"
     Examples:
-      | email               | password | role   | page      |
-      | student98@library   | A15Oposz | stu98  | Books     |
-      | student99@library   | 8tIDMH5x | stu99  | Books     |
-      | student100@library  | CUcGL8fe | stu100 | Books     |
-      | librarian15@library | S5Ejblg1 | lib15  | Dashboard |
+      | email               | password | page      |
+      | student94@library   | KccVOoLA | Books     |
+      | student95@library   | Vu2BiIwB | Books     |
+      | student96@library   | HvGl6Nsy | Books     |
+      | librarian16@library | 8BzUhhaU | Dashboard |
+#  //a[@href='#dashboard']
 #  @librarian
 #  Scenario: Login as a librarian
 #    Given I am on the login page
