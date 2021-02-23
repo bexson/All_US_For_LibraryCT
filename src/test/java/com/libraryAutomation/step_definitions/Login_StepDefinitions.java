@@ -17,9 +17,11 @@ public class Login_StepDefinitions {
     LandingPage landingPage = new LandingPage();
     BasePage basePage = new BasePage();
 
+    String url = ConfigurationReader.getProperty("url");
+
     @Given("The user navigates to login page")
     public void the_user_navigates_to_login_page() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        Driver.getDriver().get(url);
     }
 
     @When("The user enters {string} and {string}")
@@ -37,15 +39,15 @@ public class Login_StepDefinitions {
     public void theUserSeeThis(String page , String email) {
         if (email.contains("student")){
             String booksModuleText = basePage.booksModuleStudent.getText(); //Books
-            Assert.assertTrue(basePage.booksModuleStudent.isDisplayed());
-            Assert.assertTrue(booksModuleText.equalsIgnoreCase(page));
+            assert basePage.booksModuleStudent.isDisplayed();
+            assert booksModuleText.equalsIgnoreCase(page);
         }
 
         if (email.contains("librarian")){
             String dashboardText = basePage.dashboardModule.getText();
 
-            Assert.assertTrue(basePage.dashboardModule.isDisplayed());
-            Assert.assertTrue(dashboardText.equalsIgnoreCase(page));
+            assert basePage.dashboardModule.isDisplayed();
+            assert dashboardText.equalsIgnoreCase(page);
         }
 
         landingPage.studentButton.click();
@@ -60,19 +62,30 @@ public class Login_StepDefinitions {
 
     @When("The user login as a librarian")
         public void the_user_login_as_a_librarian() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        Driver.getDriver().get(url);
         loginPage.loginAsLibrarian();
     }
 
 
     @Then("dashboard should be displayed")
     public void dashboard_should_be_displayed() {
-        Assert.assertTrue(basePage.dashboardModule.isDisplayed());
+        assert basePage.dashboardModule.isDisplayed();
         Driver.closeDriver();
     }
 
 
+//-----------------------------------------DOING 3RD SCENARIO-----------------------------------------------
+@When("the user login as a student")
+public void the_user_login_as_a_student() {
+    Driver.getDriver().get(url);
+    loginPage.loginAsStudent1();
+}
 
+    @Then("books module should be displayed")
+    public void books_module_should_be_displayed() {
+        assert basePage.booksModuleStudent.isDisplayed();
+        Driver.closeDriver();
+    }
 
 
 }

@@ -1,3 +1,4 @@
+@loginFeature
 Feature: Login feature
   As a user I should be able to login to the library application.
   Verify that both students and librarians can login.
@@ -20,8 +21,8 @@ Feature: Login feature
   Scenario: Login as a librarian
     When The user login as a librarian
     Then dashboard should be displayed
-#  @student
-#  Scenario: Login as a student
-#    Given I am on the login page
-#    When I login as a student
-#    Then books should be displayed
+
+  @student
+  Scenario: Login as a student
+    When the user login as a student
+    Then books module should be displayed
