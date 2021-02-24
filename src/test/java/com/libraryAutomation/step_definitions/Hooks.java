@@ -15,39 +15,19 @@ public class Hooks {
     String url = ConfigurationReader.getProperty("url");
     @Before(value = "@categories")
     public void logining(){
-        Driver.getDriver().get(url);
         LoginPage loginPage = new LoginPage();
         loginPage.loginAsStudent1();
     }
+//----------------------------------------->CATEGORIES DROPDOWN HOOKS<-------------------------------------------------
 
-//----------------------------------------->LOGIN FEATURE HOOKS<-------------------------------------------------
 
-    @Before(value = "@loginFeature")
-    public void loginToEnv(){
+
+//----------------------------------------->HOOKS FOR ALL FEATURES<-------------------------------------------------
+
+    @Before (order = 1)
+    public void getUrlForAll(){
         Driver.getDriver().get(url);
     }
-
-//----------------------------------------->LOGOUT FEATURE HOOKS<-------------------------------------------------
-
-    @Before(value = "@logout")
-    public void getLoginPage(){
-        Driver.getDriver().get(url);
-    }
-
-//----------------------------------------->MODULES FEATURE HOOKS<-------------------------------------------------
-
-    @Before(value = "@studentOnBooks")
-    public void getUrl(){
-        Driver.getDriver().get(url);
-    }
-
-    @Before(value = "@librarianOnDashb")
-    public void getUrlForLibrarian(){
-        Driver.getDriver().get(url);
-    }
-
-    //----------------------------------------->MODULES FEATURE HOOKS<-------------------------------------------------
-
 
     @After()
     public void closeDriver(Scenario scenario){
@@ -62,5 +42,5 @@ public class Hooks {
         Driver.closeDriver();
     }
 
-
+//----------------------------------------->HOOKS FOR ALL FEATURES<-------------------------------------------------
     }
