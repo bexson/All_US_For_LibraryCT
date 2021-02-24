@@ -20,7 +20,36 @@ public class Hooks {
         loginPage.loginAsStudent1();
     }
 
-    @After(value = "@categories")
+//----------------------------------------->LOGIN FEATURE HOOKS<-------------------------------------------------
+
+    @Before(value = "@loginFeature")
+    public void loginToEnv(){
+        Driver.getDriver().get(url);
+    }
+
+//----------------------------------------->LOGOUT FEATURE HOOKS<-------------------------------------------------
+
+    @Before(value = "@logout")
+    public void getLoginPage(){
+        Driver.getDriver().get(url);
+    }
+
+//----------------------------------------->MODULES FEATURE HOOKS<-------------------------------------------------
+
+    @Before(value = "@studentOnBooks")
+    public void getUrl(){
+        Driver.getDriver().get(url);
+    }
+
+    @Before(value = "@librarianOnDashb")
+    public void getUrlForLibrarian(){
+        Driver.getDriver().get(url);
+    }
+
+    //----------------------------------------->MODULES FEATURE HOOKS<-------------------------------------------------
+
+
+    @After()
     public void closeDriver(Scenario scenario){
 
         if (scenario.isFailed()) {
@@ -32,36 +61,6 @@ public class Hooks {
         BrowserUtils.sleep(5);
         Driver.closeDriver();
     }
-//----------------------------------------->LOGIN FEATURE HOOKS<-------------------------------------------------
 
-    @Before(value = "@loginFeature")
-    public void loginToEnv(){
-        Driver.getDriver().get(url);
-    }
-    @After(value = "@loginFeature")
-    public void close(Scenario scenario){
-        if (scenario.isFailed()) {
-            byte[] screenShot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenShot, "image/png", scenario.getName());
-        }
-        BrowserUtils.sleep(3);
-        Driver.closeDriver();
-    }
-//----------------------------------------->LOGOUT FEATURE HOOKS<-------------------------------------------------
 
-    @Before(value = "@logout")
-    public void getLoginPage(){
-        Driver.getDriver().get(url);
     }
-
-    @After(value = "@logout")
-    public void close_Driver(Scenario scenario){
-        if (scenario.isFailed()) {
-            byte[] screenShot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenShot, "image/png", scenario.getName());
-        }
-        BrowserUtils.sleep(3);
-        Driver.closeDriver();
-    }
-
-}
