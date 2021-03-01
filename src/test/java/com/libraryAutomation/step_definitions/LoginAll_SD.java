@@ -1,5 +1,6 @@
 package com.libraryAutomation.step_definitions;
 
+import com.libraryAutomation.pages.LandingPage;
 import com.libraryAutomation.pages.LoginPage;
 import com.libraryAutomation.utilities.Driver;
 import io.cucumber.java.en.Given;
@@ -23,6 +24,7 @@ public class LoginAll_SD {
    public FileOutputStream fileOutputStream;
    LoginPage loginPage = new LoginPage();
    private final String path = "LibraryCT.xlsx";
+   LandingPage landingPage = new LandingPage();
 
     @Given("The user goes to login page")
     public void the_user_goes_to_login_page() {
@@ -38,7 +40,9 @@ public class LoginAll_SD {
 
         sheet = workbook.getSheet("Sheet1");
 
-        XSSFRow currentRow = sheet.getRow(4);
+        for (int rowNum = 1; rowNum <= sheet.getLastRowNum() ; rowNum++) {
+
+        XSSFRow currentRow = sheet.getRow(rowNum);
 
         String email = currentRow.getCell(1).toString(); //email
 
@@ -62,13 +66,22 @@ public class LoginAll_SD {
         String expectedUrl = currentRow.getCell(3).toString();
         System.out.println("expectedUrl = " + expectedUrl);
         System.out.println("actualUrl = " + actualUrl);
-//        assert actualUrl.equals(expectedUrl);
-//        if (actualUrl.equals(expectedUrl)) {
-//            assert actualUrl.equals(expectedUrl);
-//            currentRow.getCell(5).setCellValue("PASS!!");
-//        }else {
-//            currentRow.getCell(5).setCellValue("FAIL!!");
-//        }
+
+        if(currentRow.getCell(5)==null){
+            currentRow.createCell(5);
+        }
+
+        if (actualUrl.equals(expectedUrl)) {
+            assert actualUrl.equals(expectedUrl);
+            currentRow.getCell(5).setCellValue("PASS!!");
+        }else {
+            currentRow.getCell(5).setCellValue("FAIL!!");
+        }
+
+        landingPage.testStudentOrLibrarian.click();
+        landingPage.logOutButton.click();
+
+        }
 
         workbook.write(fileOutputStream);
 
