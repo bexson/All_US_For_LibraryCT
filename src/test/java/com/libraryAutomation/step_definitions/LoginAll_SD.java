@@ -2,6 +2,7 @@ package com.libraryAutomation.step_definitions;
 
 import com.libraryAutomation.pages.LandingPage;
 import com.libraryAutomation.pages.LoginPage;
+import com.libraryAutomation.utilities.BrowserUtils;
 import com.libraryAutomation.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,6 +16,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class LoginAll_SD {
 //        workbook > sheet > row > cell
@@ -64,21 +67,29 @@ public class LoginAll_SD {
         //Passing the 'actualUrl' into Excel sheet 'ActualUrl' cell
         currentRow.getCell(4).setCellValue(actualUrl);
         String expectedUrl = currentRow.getCell(3).toString();
-        System.out.println("expectedUrl = " + expectedUrl);
-        System.out.println("actualUrl = " + actualUrl);
+//        System.out.println("expectedUrl = " + expectedUrl);
+//        System.out.println("actualUrl = " + actualUrl);
 
         if(currentRow.getCell(5)==null){
             currentRow.createCell(5);
         }
 
-        if (actualUrl.equals(expectedUrl)) {
-            assert actualUrl.equals(expectedUrl);
+        if (actualUrl.equalsIgnoreCase(expectedUrl)) {
+            assert actualUrl.equalsIgnoreCase(expectedUrl);
             currentRow.getCell(5).setCellValue("PASS!!");
         }else {
             currentRow.getCell(5).setCellValue("FAIL!!");
         }
 
+            if (currentRow.getCell(6) == null) {
+                currentRow.createCell(6);
+            }
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm a");
+            currentRow.getCell(6).setCellValue(LocalDateTime.now().format(dtf));
+
         landingPage.testStudentOrLibrarian.click();
+            BrowserUtils.sleep(1);
         landingPage.logOutButton.click();
 
         }
