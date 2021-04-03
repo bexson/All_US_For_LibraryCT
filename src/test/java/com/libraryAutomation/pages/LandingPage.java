@@ -27,4 +27,15 @@ public class LandingPage {
 
     @FindBy(xpath = "//a[@class='dropdown-item']")
     public WebElement logOutButton;
+
+    //LIBRARIAN LOGS IN
+    @FindBy(id = "user_count")
+    public WebElement userCount ;
+
+    @FindBy(id = "book_count")
+    public WebElement bookCount ;
+
+    @FindBy(id = "borrowed_books")
+    public WebElement borrowed_books_count ;
+
 }

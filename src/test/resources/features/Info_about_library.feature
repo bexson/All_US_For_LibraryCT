@@ -12,7 +12,6 @@ Feature: Librarian able to see the info about library
 	@G17-146
 	Scenario: Librarian able to see the total number of users #1.1
 		Given librarian logged in
-		When librarian is on the landing page
 		Then librarian should see the total number of users
 
 	@G17-147

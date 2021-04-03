@@ -21,6 +21,9 @@ public class LoginPage {
     @FindBy(xpath = "//button[.='Sign in']")
     public WebElement loginButton;
 
+    @FindBy(xpath = "//span[.='Test Librarian 16']")
+    public static WebElement librarian16 ;
+
 
     public void loginAsStudent1(){
 

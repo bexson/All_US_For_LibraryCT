@@ -34,6 +34,7 @@ public class Login_StepDefinitions {
 
     @Then("The user see {string} on this {string}")
     public void theUserSeeThis(String page , String email) {
+//        System.out.println("Driver.getDriver().getCurrentUrl() = " + Driver.getDriver().getCurrentUrl());
         if (email.contains("student")){
             String booksModuleText = basePage.booksModuleStudent.getText(); //Books
             assert basePage.booksModuleStudent.isDisplayed();
@@ -71,7 +72,6 @@ public void the_user_login_as_a_student() {
     @Then("books module should be displayed")
     public void books_module_should_be_displayed() {
         assert basePage.booksModuleStudent.isDisplayed();
-        Driver.closeDriver();
     }
 
 
